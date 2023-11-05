@@ -51,8 +51,6 @@ int main() {
         processes[i].executed = 0;
     }
 
-
-
     float current_time = 0;
     int executed = 0;
     int execution_sequence[num_processes];
@@ -78,10 +76,7 @@ int main() {
             details[next_process].waiting_time = processes[next_process].waiting_time;
             details[next_process].current_time = current_time;
             details[next_process].completion_time = current_time + processes[next_process].burst_time;
-//            printf("   P%d    |     %.2f     |    %.2f    |   %.2f   |    %.2f      |   %.2f-%.2f\n",
-//                   processes[next_process].id, processes[next_process].arrival_time,
-//                   processes[next_process].burst_time, processes[next_process].priority,
-//                   processes[next_process].waiting_time, current_time, current_time + processes[next_process].burst_time);
+
             current_time += processes[next_process].burst_time;
             executed++;
 
@@ -90,29 +85,23 @@ int main() {
 
             execution_sequence[sequence_index] = processes[next_process].id;
             sequence_index++;
-
-            // Store the details in the details array
-//            details[next_process].id = processes[next_process].id;
-//            details[next_process].arrival_time = processes[next_process].arrival_time;
-//            details[next_process].burst_time = processes[next_process].burst_time;
-//            details[next_process].priority = processes[next_process].priority;
-//            details[next_process].waiting_time = processes[next_process].waiting_time;
-//            details[next_process].current_time = current_time;
-//            details[next_process].completion_time = current_time + processes[next_process].burst_time;
- } else {
+        } else {
             current_time += 1;
         }
     }
+    
+    // Print the table with process details
     printf("\nTable:\n");
     printf("--------------------------------------------------------------------------------\n");
     printf(" Process | Arrival Time | Burst Time | Priority | Waiting Time | Execution\n");
     printf("--------------------------------------------------------------------------------\n");
-    for(i = 0; i< num_processes; i++){
-    	printf("   P%d    |     %.2f     |    %.2f    |   %.2f   |    %.2f      |   %.2f-%.2f\n",
-                   details[i].id, details[i].arrival_time,
-                   details[i].burst_time, details[i].priority,
-                   details[i].waiting_time, details[i].current_time, details[i].completion_time);
-	}
+    for (i = 0; i < num_processes; i++) {
+        printf("   P%d    |     %.2f     |    %.2f    |   %.2f   |    %.2f      |   %.2f-%.2f\n",
+               details[i].id, details[i].arrival_time, details[i].burst_time,
+               details[i].priority, details[i].waiting_time, details[i].current_time, details[i].completion_time);
+    }
+
+    // Print the Gantt Chart
     printf("\nGantt Chart:\n");
     printf("\n--------------------------\n");
     printf("| ");
@@ -134,16 +123,6 @@ int main() {
 
     printf("\nAverage Waiting Time: %.2f\n", average_waiting_time);
 
-    // Print all the details
-    printf("\nAll Process Details:\n");
-    printf("--------------------------------------------------------------------------------------------\n");
-    printf(" Process | Arrival Time | Burst Time | Priority | Waiting Time | Current Time | Completion Time\n");
-    printf("--------------------------------------------------------------------------------------------\n");
-    for (i = 0; i < num_processes; i++) {
-        printf("   P%d    |     %.2f     |    %.2f    |   %.2f   |    %.2f      |     %.2f     |      %.2f\n",
-               details[i].id, details[i].arrival_time, details[i].burst_time,
-               details[i].priority, details[i].waiting_time, details[i].current_time, details[i].completion_time);
-    }
-
     return 0;
 }
+
