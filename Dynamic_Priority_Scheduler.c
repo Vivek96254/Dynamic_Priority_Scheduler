@@ -20,12 +20,15 @@ struct AllDetails {
     float completion_time;
 };
 
+// Function to calculate the priority of processes
 void calculate_priority(struct Process processes[], int n, float current_time) {
     int i;
     for (i = 0; i < n; i++) {
         if (processes[i].burst_time > 0 && processes[i].arrival_time <= current_time) {
+            // Calculate priority using the formula
             processes[i].priority = 1 + (current_time - processes[i].arrival_time) / processes[i].burst_time;
         } else {
+            // Set a default priority for processes that can't be executed yet
             processes[i].priority = -1;
         }
     }
