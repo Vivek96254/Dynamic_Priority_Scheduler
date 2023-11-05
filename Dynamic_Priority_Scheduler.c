@@ -101,7 +101,7 @@ int main() {
                    details[i].id, details[i].arrival_time,
                    details[i].burst_time, details[i].priority,
                    details[i].waiting_time, details[i].current_time, details[i].completion_time);
-	}
+}
 	
     printf("\nGantt Chart:\n");
     printf("\n--------------------------\n");
